@@ -18,13 +18,11 @@ def flush():
 
 
 def gotoxy(x, y):
-    """Jump to position (x, y) with the cursor. Upper left corner is (1, 1)."""
-    write(colorama.Cursor.POS(x, y))
+    """Jump to position (x, y) with the cursor. Upper left corner is (0, 0).
+    Note that ANSI terminals use (1,1) for the upper left corner, so
+    this is not the same as colorama.Cursor.POS()."""
+    write(colorama.Cursor.POS(x+1, y+1))
 
-
-def home():
-    """Jump to upper left corner of screen."""
-    gotoxy(1, 1)
 
 def clrscr():
     """Clear the screen and return the cursor to the upper left position."""

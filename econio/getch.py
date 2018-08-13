@@ -153,7 +153,9 @@ def getch():
     backspace and other controlling keys: see the keyboard constants.
     ASCII code is returned for other keys. Non-ASCII keys probably won't work.
     Characters are not echoed to the screen when in raw mode.
-    Only to be used after calling rawmode()."""
+    Only to be used after calling rawmode().
+    Note that backspace will be code 8, regardless of terminal settings
+    (whether it sent BS or DEL char). Enter will always be 10, even on Windows."""
     assert(_rawmode)
     flush()
     return _impl.getch()

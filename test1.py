@@ -6,10 +6,10 @@ econio.set_title("python-econio test")
 
 # Positioning
 econio.clrscr()
-econio.gotoxy(1, 1)
+econio.gotoxy(0, 0)
 econio.textcolor(econio.LIGHTGREEN)
 econio.write("Hello")
-econio.gotoxy(10, 1)
+econio.gotoxy(10, 0)
 econio.textbackground(econio.LIGHTBLUE)
 econio.write("world!")
 print()

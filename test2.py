@@ -18,13 +18,13 @@ while True:
     econio.write(".")
 
     if key == econio.UP:
-        y = max(y-1, 2)
+        y = max(y-1, 1)
     elif key == econio.DOWN:
-        y = min(y+1, 24)
+        y = min(y+1, 23)
     elif key == econio.LEFT:
-        x = max(x-1, 1)
+        x = max(x-1, 0)
     elif key == econio.RIGHT:
-        x = min(x+1, 80)
+        x = min(x+1, 79)
     elif key == econio.ESCAPE:
         break
 econio.normalmode()
