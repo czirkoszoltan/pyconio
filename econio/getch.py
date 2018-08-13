@@ -29,6 +29,15 @@ class _ConsoleUnix:
         "\x1B[F": END,
         "\x1B[2~": INSERT,
         "\x1B[3~": DELETE,
+        "\x1B[1;5A": CTRLUP,
+        "\x1B[1;5B": CTRLDOWN,
+        "\x1B[1;5D": CTRLLEFT,
+        "\x1B[1;5C": CTRLRIGHT,
+        "\x1B[5;5~": CTRLPAGEUP,
+        "\x1B[6;5~": CTRLPAGEDOWN,
+        "\x1B[1;5H": CTRLHOME,
+        "\x1B[1;5F": CTRLEND,
+        "\x1B[3;5~": CTRLDELETE,
     }
 
     def __init__(self):
@@ -66,7 +75,7 @@ class _ConsoleUnix:
 
     def getch(self):
         s = self._rawgetch()
-        if s == "\x7F":    # windows compat
+        if s == "\x7F":
             return BACKSPACE
         if s != "\x1B" or not self.kbhit():    # only an escape sequence if other chars can be read
             return ord(s)
@@ -91,19 +100,6 @@ class _ConsoleUnix:
 
 class _ConsoleWindows:
     _windowskeycodes = {
-        59: F1,
-        60: F2,
-        61: F3,
-        62: F4,
-        63: F5,
-        64: F6,
-        65: F7,
-        66: F8,
-        67: F9,
-        68: F10,
-        133: F11,
-        134: F12,
-
         72: UP,
         80: DOWN,
         75: LEFT,
@@ -114,6 +110,16 @@ class _ConsoleWindows:
         79: END,
         82: INSERT,
         83: DELETE,
+        141: CTRLUP,
+        145: CTRLDOWN,
+        115: CTRLLEFT,
+        116: CTRLRIGHT,
+        134: CTRLPAGEUP,
+        118: CTRLPAGEDOWN,
+        119: CTRLHOME,
+        117: CTRLEND,
+        146: CTRLINSERT,
+        147: CTRLDELETE,
     }
 
     def __init__(self):
@@ -132,9 +138,11 @@ class _ConsoleWindows:
 
     def getch(self):
         code = self._rawgetch()
+        if code == 0x7F:
+            return BACKSPACE
         if code == 0x0D:    # linux compat
             return ENTER
-        if code != 0x00 and code != 0xE0:
+        if code != 0xE0:
             return code
         code = self._rawgetch()
         return self._windowskeycodes.get(code, UNKNOWNKEY)
@@ -155,7 +163,9 @@ def getch():
     Characters are not echoed to the screen when in raw mode.
     Only to be used after calling rawmode().
     Note that backspace will be code 8, regardless of terminal settings
-    (whether it sent BS or DEL char). Enter will always be 10, even on Windows."""
+    (whether it sent BS or DEL char). Enter will always be 10, even on Windows.
+    On Windows, this function sometimes returns 0's, so just ignore them.
+    Also function keys are not supported on Windows."""
     assert(_rawmode)
     flush()
     return _impl.getch()

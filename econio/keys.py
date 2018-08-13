@@ -1,5 +1,6 @@
 # Copyright (c) 2018 Czirkos Zoltan. MIT license, see LICENSE file.
 
+# function keys are not supported on Windows
 F1 = -1
 F2 = -2
 F3 = -3
@@ -23,6 +24,17 @@ HOME = -26
 END = -27
 INSERT = -28
 DELETE = -29
+
+CTRLUP = -30
+CTRLDOWN = -31
+CTRLLEFT = -32
+CTRLRIGHT = -33
+CTRLPAGEUP = -34
+CTRLPAGEDOWN = -35
+CTRLHOME = -36
+CTRLEND = -37
+CTRLINSERT = -38
+CTRLDELETE = -39
 
 UNKNOWNKEY = -255
 
