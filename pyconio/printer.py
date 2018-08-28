@@ -41,6 +41,6 @@ def textbackground(idx):
     write(backgroundcolors[idx])
 
 
-def set_title(title):
+def settitle(title):
     """Set the title of the terminal window."""
     write(colorama.ansi.set_title(title))

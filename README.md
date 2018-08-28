@@ -1,4 +1,4 @@
-# Python econio library
+# PyConio: Python econio library
 
 Colored output and raw keyboard handling for Linux and Windows console.
 
@@ -11,10 +11,10 @@ for color output, which is included for convenience.
 See the functions in `printer.py`:
 
 ```python
-import econio
+import pyconio
 
-econio.clrscr()
-econio.gotoxy(10, 0)
+pyconio.clrscr()
+pyconio.gotoxy(10, 0)
 print("Hello world!")
 ```
 
@@ -24,25 +24,25 @@ print("Hello world!")
 See the constants in `colors.py`:
 
 ```python
-import econio
+import pyconio
 
-econio.textcolor(econio.LIGHTGREEN)
-econio.textbackground(econio.BLUE)
+pyconio.textcolor(pyconio.LIGHTGREEN)
+pyconio.textbackground(pyconio.BLUE)
 print("Hello world!")
 ```
 
 Color codes can be embedded into strings:
 
 ```python
-print("{}Hello {}world!".format(econio.textcolors[econio.RED], econio.textcolors[econio.GREEN]))
+print("{}Hello {}world!".format(pyconio.textcolors[pyconio.RED], pyconio.textcolors[pyconio.GREEN]))
 ```
 
 
 ## Buffered output
 
-The function `econio.write()` works exactly like `print()`, but does not
+The function `pyconio.write()` works exactly like `print()`, but does not
 flush the output by default. This can be used to draw an entire scene.
-Then you can use `econio.flush()` – but econio tries to handle that
+Then you can use `pyconio.flush()` – but pyconio tries to handle that
 the same way Python does, by flushing the output when input is requested.
 
 
@@ -53,44 +53,44 @@ Just use `input()` as usual.
 
 ## Raw keyboard input
 
-Switch to raw mode using `econio.rawmode()`. Then use `econio.kbhit()` to check
-if a key is pressed. `econio.getch()` returns an ASCII code or a key code
-(see `keys.py`). Finally call `econio.normalmode()`.
+Switch to raw mode using `pyconio.rawmode()`. Then use `pyconio.kbhit()` to check
+if a key is pressed. `pyconio.getch()` returns an ASCII code or a key code
+(see `keys.py`). Finally call `pyconio.normalmode()`.
 
 ```python
-import econio
+import pyconio
 
-econio.clrscr()
+pyconio.clrscr()
 print("Use cursor keys to control the asterisk")
 
 x = 40
 y = 12
-econio.rawmode()
+pyconio.rawmode()
 while True:
-    econio.gotoxy(x, y)
-    econio.textcolor(econio.LIGHTGREEN)
-    econio.write("*")
-    econio.gotoxy(80, 24)
+    pyconio.gotoxy(x, y)
+    pyconio.textcolor(pyconio.LIGHTGREEN)
+    pyconio.write("*")
+    pyconio.gotoxy(80, 24)
     
-    key = econio.getch()
-    econio.gotoxy(x, y)
-    econio.textcolor(econio.BLUE)
-    econio.write(".")
+    key = pyconio.getch()
+    pyconio.gotoxy(x, y)
+    pyconio.textcolor(pyconio.BLUE)
+    pyconio.write(".")
 
-    if key == econio.UP:
+    if key == pyconio.UP:
         y = max(y-1, 1)
-    elif key == econio.DOWN:
+    elif key == pyconio.DOWN:
         y = min(y+1, 23)
-    elif key == econio.LEFT:
+    elif key == pyconio.LEFT:
         x = max(x-1, 0)
-    elif key == econio.RIGHT:
+    elif key == pyconio.RIGHT:
         x = min(x+1, 79)
-    elif key == econio.ESCAPE:
+    elif key == pyconio.ESCAPE:
         break
-econio.normalmode()
+pyconio.normalmode()
 ```
 
-You can use `with econio.rawkeys()` as well.
+You can use `with pyconio.rawkeys()` as well.
 
 ## License
 

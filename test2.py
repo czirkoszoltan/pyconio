@@ -1,30 +1,30 @@
-import econio
+import pyconio
 
-econio.clrscr()
+pyconio.clrscr()
 print("Use cursor keys to control the asterisk")
 
 x = 40
 y = 12
-econio.rawmode()
+pyconio.rawmode()
 while True:
-    econio.gotoxy(x, y)
-    econio.textcolor(econio.LIGHTGREEN)
-    econio.write("*")
-    econio.gotoxy(80, 24)
+    pyconio.gotoxy(x, y)
+    pyconio.textcolor(pyconio.LIGHTGREEN)
+    pyconio.write("*")
+    pyconio.gotoxy(80, 24)
     
-    key = econio.getch()
-    econio.gotoxy(x, y)
-    econio.textcolor(econio.BLUE)
-    econio.write(".")
+    key = pyconio.getch()
+    pyconio.gotoxy(x, y)
+    pyconio.textcolor(pyconio.BLUE)
+    pyconio.write(".")
 
-    if key == econio.UP:
+    if key == pyconio.UP:
         y = max(y-1, 1)
-    elif key == econio.DOWN:
+    elif key == pyconio.DOWN:
         y = min(y+1, 23)
-    elif key == econio.LEFT:
+    elif key == pyconio.LEFT:
         x = max(x-1, 0)
-    elif key == econio.RIGHT:
+    elif key == pyconio.RIGHT:
         x = min(x+1, 79)
-    elif key == econio.ESCAPE:
+    elif key == pyconio.ESCAPE:
         break
-econio.normalmode()
+pyconio.normalmode()
